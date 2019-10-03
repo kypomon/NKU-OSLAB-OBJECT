@@ -16,7 +16,7 @@ missions:
 总结了下最常用的命令：
 
 - 更新本地仓库
-  - 初次使用整个clone：git clone https://github.com/rootCQ/Database_Homework.git
+  - 初次使用整个clone：git clone https://github.com/kypomon/NKU-OSLAB-OBJECT.git
   - 后面直接 git pull origin master
 - git checkout -b dev 创建并转到分支dev
 - git status 查看状态新替换的文件变绿才能push，
