@@ -1,4 +1,4 @@
-# NKU-OSLAB-OBJECT1
+# NKU-OSLAB-OBJECT
 >  DDL for our team's project is 2019/10/07  
 It is about os lab1 in NKU 2019  
 missions:  
