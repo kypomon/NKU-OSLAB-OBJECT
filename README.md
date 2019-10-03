@@ -1,6 +1,6 @@
 # NKU-OSLAB-OBJECT
 >  DDL for our team's project is 2019/10/07  
-It is about os lab1 in NKU 2019  
+It is about os lab in NKU 2019  
 missions:  
 - zxy:问题一+作业三+问题三  
 - fy:作业四+问题四  
