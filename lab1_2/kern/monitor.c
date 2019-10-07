@@ -55,10 +55,39 @@ mon_kerninfo(int argc, char **argv, struct Trapframe *tf)
 	return 0;
 }
 
-int
-mon_backtrace(int argc, char **argv, struct Trapframe *tf)
+int mon_backtrace(int argc,char **argv,struct Trapframe *tf)
 {
-	// Your code here.
+    uint32_t ebp,eip,arg[5];
+    uint32_t *ptr_ebp;
+    
+    ebp =read_ebp();
+    eip=*((uint32_t*)ebp+1);
+    struct Eipdebuginfo info;
+    arg[0]=*((uint32_t*)ebp+2);
+    arg[1]=*((uint32_t*)ebp+3);
+    arg[2]=*((uint32_t*)ebp+4);
+    arg[3]=*((uint32_t*)ebp+5);
+    arg[4]=*((uint32_t*)ebp+6);
+	cprintf("Stack backtrace:\n");
+	while(ebp!=0x00)
+	{
+		ptr_ebp=(uint32_t *)ebp;
+		cprintf("ebp %08x eip %08x args %08x %08x %08x %08x %08x\n",ebp,eip,arg[0],arg[1],arg[2],arg[3],arg[4]);
+		ebp= *(uint32_t *)ebp;
+		eip= *((uint32_t *)ebp+1);
+		arg[0]=*((uint32_t*)ebp+2);
+		arg[1]=*((uint32_t*)ebp+3);
+		arg[2]=*((uint32_t*)ebp+4);
+		arg[3]=*((uint32_t*)ebp+5);
+		arg[4]=*((uint32_t*)ebp+6);
+		if(debuginfo_eip(ptr_ebp[1],&info)==0){
+		uint32_t fn_offset =ptr_ebp[1]-info.eip_fn_addr;
+		cprintf("\t\t%s:%d: %.*s+%d\n",info.eip_file,
+		info.eip_line,info.eip_fn_namelen,info.eip_fn_name,fn_offset);
+		
+		}
+		ebp=*ptr_ebp;
+	}
 	return 0;
 }
 
